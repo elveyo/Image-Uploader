@@ -1,3 +1,6 @@
+body {
+  font-family: "Rubik Glitch", cursive;
+}
 .App {
   text-align: center;
 }
@@ -17,7 +20,6 @@
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
@@ -34,5 +36,30 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+.no-images {
+  margin-top: 50px;
+  color: rgb(249, 247, 247);
+  letter-spacing: 4px;
+  text-shadow: 2px 4px rgba(7, 128, 176, 0.758);
+  font-size: 30px;
+}
+.loading {
+  width: 60px;
+  height: 60px;
+  border: 5px solid white;
+  border-width: 0 0 1px 1px;
+  border-radius: 50%;
+  margin: 50px auto;
+  animation: rotate 0.5s ease infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(365deg);
   }
 }

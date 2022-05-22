@@ -1,0 +1,43 @@
+.notification {
+  position: absolute;
+  right: 10%;
+  width: 200px;
+  height: 40px;
+  background-color: rgb(255, 255, 255);
+  font-size: 15px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 5px;
+  opacity: 0.9;
+
+  box-shadow: 1px 1px 8px rgb(73, 73, 255);
+  z-index: 1000000000000000;
+}
+.uploaded {
+  color: green;
+  font-size: 20px;
+}
+.deleted {
+  color: red;
+  font-size: 22px;
+}
+.uploading {
+  color: rgb(51, 130, 220);
+  font-size: 20px;
+  animation: rotate 1s ease infinite;
+}
+.notification p {
+  letter-spacing: 1px;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(365deg);
+  }
+}

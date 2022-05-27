@@ -116,7 +116,7 @@ input:hover .background {
 }
 @media only screen and (max-width: 550px) {
   .uploadPreview {
-    width: 50%;
+    width: 40%;
     height: 30%;
   }
   #delete,
@@ -130,7 +130,7 @@ input:hover .background {
 }
 @media only screen and (max-width: 800px) {
   .uploadPreview {
-    width: 60%;
+    width: 70%;
     height: 40%;
   }
 }

@@ -1,19 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../style/Galery.css";
-import { TiDelete } from "react-icons/ti";
-import { getDownloadURL, listAll } from "firebase/storage";
-import Loading from "./Loading";
+import { getDownloadURL, listAll, ref, deleteObject } from "firebase/storage";
 import { motion } from "framer-motion";
+import { storage } from "../firebaseConfig";
+import Loading from "./Loading";
+import ImageStatus from "./ImageStatus";
+import Images from "./Images";
+import { AppContext } from "../helper/ImageState";
 
-function Galery({ imageList, deleteImage, setImageList, listImageRef }) {
+const listImageRef = ref(storage, "images/");
+
+function Galery({ imageList, setImageList }) {
   const [isImageOpened, setIsImageOpened] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const { dispatch } = useContext(AppContext);
   const showImage = (url) => {
     setImageUrl(url);
     setIsImageOpened(true);
   };
 
+  //function for deleting image in storage
+  const deleteImage = (url) => {
+    dispatch({ type: "deleting" });
+    const deleteRef = ref(storage, url);
+    deleteObject(deleteRef).then(() => {
+      setImageList(imageList.filter((imgUrl) => imgUrl != url));
+      dispatch({ type: "deleted" });
+      setTimeout(() => dispatch({ type: "" }), 1000);
+    });
+  };
   //fething data from firebase storage
   useEffect(() => {
     listAll(listImageRef).then((response) => {
@@ -22,38 +38,32 @@ function Galery({ imageList, deleteImage, setImageList, listImageRef }) {
           setImageList((prev) => [...prev, url]);
         });
       });
-      setTimeout(() => setIsLoading(false), 2000);
+      setTimeout(() => setIsLoading(false), 1000);
     });
   }, []);
 
-  if (imageList.length > 0) {
-    return (
-      <>
-        <div className="galery">
-          {imageList.map((url) => (
-            <div className="image">
-              <img src={url} onClick={() => showImage(url)}></img>
-              <TiDelete onClick={() => deleteImage(url)} />
-            </div>
-          ))}
-        </div>
-        {isImageOpened && (
-          <div className="full-image" onClick={() => setIsImageOpened(false)}>
-            <motion.img
-              initial={{ y: "-60vh" }}
-              animate={{ y: 0 }}
-              src={imageUrl}
-            ></motion.img>
-          </div>
-        )}
-      </>
-    );
-  }
   if (isLoading) return <Loading />;
 
-  if (imageList.length == 0) {
-    return <h1 className="no-images">No images !</h1>;
-  }
+  return (
+    <>
+      {imageList.length === 0 && <h1 className="no-images">No images !</h1>}
+      <Images
+        deleteImage={deleteImage}
+        showImage={showImage}
+        imageList={imageList}
+      />
+      {isImageOpened && (
+        <div className="full-image" onClick={() => setIsImageOpened(false)}>
+          <motion.img
+            initial={{ y: "-60vh" }}
+            animate={{ y: 0 }}
+            src={imageUrl}
+          ></motion.img>
+        </div>
+      )}
+      <ImageStatus />
+    </>
+  );
 }
 
 export default Galery;

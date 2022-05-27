@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import "../style/Title.css";
 
-function Title() {
+const Title = memo((props) => {
   return (
     <div className="fullTitle">
       <div className="title">
@@ -29,6 +29,6 @@ function Title() {
       </div>
     </div>
   );
-}
+});
 
 export default Title;

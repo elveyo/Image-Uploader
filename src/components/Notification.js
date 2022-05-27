@@ -4,6 +4,16 @@ import { motion } from "framer-motion";
 import { MdOutlineDoneOutline, MdOutlineDelete } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
+const renderNotification = (type) => {
+  switch (type) {
+    case "uploaded":
+      return <MdOutlineDoneOutline className="uploaded" />;
+    case "deleted":
+      return <MdOutlineDelete className="deleted" />;
+    case "inProcess":
+      return <AiOutlineLoading3Quarters className="uploading" />;
+  }
+};
 function Notification(props) {
   return (
     <motion.div
@@ -11,13 +21,7 @@ function Notification(props) {
       animate={{ bottom: "45px" }}
       className="notification"
     >
-      {props.type === "uploaded" && (
-        <MdOutlineDoneOutline className="uploaded" />
-      )}
-      {props.type === "deleted" && <MdOutlineDelete className="deleted" />}
-      {props.type === "uploading" && (
-        <AiOutlineLoading3Quarters className="uploading" />
-      )}
+      {renderNotification(props.type)}
 
       <p>{props.info}</p>
     </motion.div>

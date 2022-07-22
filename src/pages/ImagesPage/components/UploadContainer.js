@@ -1,23 +1,30 @@
 import React, { useContext } from "react";
-import "../style/UploadContainer.css";
+import "../../../style/UploadContainer.css";
 import { useState } from "react";
 import { HiUpload } from "react-icons/hi";
 import { TiDelete } from "react-icons/ti";
-import { storage } from "../firebaseConfig";
+import { storage } from "../../../firebaseConfig";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
-import { AppContext } from "../helper/ImageState";
+import { AppContext } from "../../../helper/ImageContext";
+import { useAuth } from "../../../helper/AuthContext";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../firebaseConfig";
 
 function UploadContainer({ setImageList }) {
   const [imagePreview, setImagePreview] = useState("");
   const [image, setImage] = useState(null);
   const { dispatch, isUploaded } = useContext(AppContext);
-
+  const { user, setUser } = useAuth();
+  const signOutUser = async () => {
+    setImageList([]);
+    await signOut(auth);
+  };
   //function for uploading image
   const uploadImage = () => {
     if (image == null) return;
     dispatch({ type: "uploading" });
-    const imageRef = ref(storage, `images/${image.name + v4()}`);
+    const imageRef = ref(storage, `${user.email}/${image.name + v4()}`);
     uploadBytes(imageRef, image).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         setImageList((prev) => [...prev, url]);
@@ -59,6 +66,14 @@ function UploadContainer({ setImageList }) {
           </div>
         </div>
       )}
+      <button
+        className="sign-out"
+        onClick={() => {
+          signOutUser();
+        }}
+      >
+        Sign out
+      </button>
     </>
   );
 }

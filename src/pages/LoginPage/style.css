@@ -1,0 +1,236 @@
+.login-page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #56bbf1;
+}
+.image-area {
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.image-area::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top: 500px solid #56bbf1;
+  border-right: 60px solid transparent;
+}
+.image-area::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border-bottom: 500px solid #56bbf1;
+  border-right: 60px solid transparent;
+}
+.text {
+  font-size: 3rem;
+  color: white;
+  letter-spacing: 4px;
+  text-align: left;
+  text-shadow: 2px 1px 5px black;
+}
+.text-area {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-left: 50px;
+  font-family: "Bebas Neue", cursive;
+}
+.box {
+  width: 60%;
+  height: 60%;
+  transform: rotateX(20deg) rotateY(22deg);
+  box-shadow: 3px 5px 10px rgba(56, 56, 56, 0.71);
+  transition: all 0.5s ease;
+  animation: rotate-form 1s;
+  position: relative;
+  background: url("./image.png");
+  background-position: center;
+  background-size: 100% 100%;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+}
+.form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: "Bebas Neue", cursive;
+  text-align: center;
+  letter-spacing: 1px;
+  background-color: rgba(255, 255, 255, 0.8);
+  backface-visibility: hidden;
+}
+.box:hover {
+  transform: rotateX(0) rotateY(0);
+}
+.box img {
+  width: 100%;
+  height: 100%;
+}
+.buttons {
+  width: 100%;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.buttons button {
+  height: 50px;
+  width: 20%;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  letter-spacing: 2px;
+  padding: 5px 10px;
+  font-weight: 400;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.5s ease;
+  border-radius: 3px;
+  font-family: inherit;
+  transition: 0.5s;
+}
+.buttons button:hover {
+  background-color: white;
+  color: #56bbf1;
+  box-shadow: 1px 1px 10px rgb(227, 227, 227);
+}
+.buttons button:nth-child(2) {
+  margin: 0 25px;
+}
+.form input {
+  width: 80%;
+  height: 45px;
+  margin-top: 10px;
+  border: 1px solid black;
+  border-radius: 2px;
+  cursor: auto;
+  font-size: 20px;
+  font-family: inherit;
+  padding: 0 10px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.data {
+  animation: 5s show;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+.data h1 {
+  letter-spacing: 1px;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+.data label {
+  display: block;
+  margin-top: 15px;
+  font-size: 1.5rem;
+}
+.data button {
+  display: block;
+  margin: 10px auto;
+  margin-top: 50px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.5s ease;
+  border-radius: 3px;
+  font-family: inherit;
+  width: 35%;
+  height: 40px;
+  background-color: #56bbf1;
+  font-size: 1.5rem;
+}
+@keyframes rotate-form {
+  from {
+    transform: rotateX(20deg) rotateY(22deg);
+  }
+  to {
+    transform: rotateX(20deg) rotateY(382deg);
+  }
+}
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .login-page {
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    justify-content: flex-start;
+  }
+  .text-area {
+    align-items: center;
+    margin: 0;
+  }
+  .buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 5%;
+  }
+  .buttons button {
+    background-color: #44aee7;
+    color: white;
+    margin: 0 30px;
+  }
+  .image-area {
+    height: 70%;
+    width: 100%;
+    background-color: transparent;
+  }
+  .box {
+    width: 80%;
+    height: 80%;
+    box-shadow: none;
+    transform: rotateX(0);
+  }
+  .image-area::before,
+  .image-area::after {
+    display: none;
+  }
+  .text {
+    font-size: 2.5rem;
+    color: #44aee7;
+  }
+  .text {
+    text-align: center;
+    text-shadow: none;
+  }
+  @keyframes rotate-form {
+    from {
+      transform: rotateX(0) rotateY(0);
+    }
+    to {
+      transform: rotateX(0) rotateY(360deg);
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .buttons button {
+    width: 45%;
+  }
+}

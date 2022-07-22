@@ -1,6 +1,6 @@
 import React, { memo } from "react";
-import image from "../cloudimage.png";
-import "../style/Animation.css";
+import image from "../../../cloudimage.png";
+import "../../../style/Animation.css";
 const Animation = memo((props) => {
   const images = [1, 2, 3, 4, 5];
 

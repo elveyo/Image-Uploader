@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AppContext } from "../helper/ImageState";
+import { AppContext } from "../../../helper/ImageContext";
 import Notification from "./Notification";
 
 function ImageStatus() {

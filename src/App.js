@@ -1,26 +1,28 @@
 import "./App.css";
 import { useState } from "react";
-import Title from "./components/Title";
-import UploadContainer from "./components/UploadContainer";
-import Galery from "./components/Galery";
-import Animation from "./components/Animation";
-import Notification from "./components/Notification";
 import "./style/Notification.css";
-import ImageState from "./helper/ImageState";
-
+import { auth } from "./firebaseConfig";
+import LoginPage from "./pages/LoginPage/Login";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Images from "./pages/ImagesPage/Images";
+import AuthContext from "./helper/AuthContext";
+console.log("re renderrrrrr");
 function App() {
   const [imageList, setImageList] = useState([]);
-  //move uploadImage and deleteImage func in other file to clean App.js
-  //make useReducer hook for notification
   return (
-    <div className="App">
-      <Animation />
-      <Title />
-      <ImageState>
-        <UploadContainer setImageList={setImageList} />
-        <Galery imageList={imageList} setImageList={setImageList} />
-      </ImageState>
-    </div>
+    <AuthContext>
+      <div className="App">
+        <Routes>
+          <Route
+            path="/images"
+            element={
+              <Images imageList={imageList} setImageList={setImageList} />
+            }
+          />
+          <Route path="/" element={<LoginPage />} />
+        </Routes>
+      </div>
+    </AuthContext>
   );
 }
 

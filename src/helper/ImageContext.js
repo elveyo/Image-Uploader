@@ -7,7 +7,7 @@ const initialState = {
   isDeleting: false,
   isDeleted: false,
 };
-function ImageState(props) {
+function ImageContext(props) {
   const reducer = (state, action) => {
     switch (action.type) {
       case "uploading":
@@ -31,4 +31,4 @@ function ImageState(props) {
   );
 }
 
-export default ImageState;
+export default ImageContext;
